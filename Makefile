@@ -1,24 +1,30 @@
 # A simple Makefile for compiling small SDL projects
 
+INC_DIR = include
+SRC_DIR = src
+
 # set the compiler
-CC := clang
+CC := g++
 
 # set the compiler flags
 CFLAGS := `sdl2-config --libs --cflags` -ggdb3 -O0 --std=c++11 -Wall -lSDL2_image -lm
 # add header files here
-HDRS :=
+HDRS := include/object.h
 
 # add source files here
-SRCS := main.cc
+SRCS := $(sort $(shell find $(SRC_DIR) -name '*.cc'))
 
 # generate names of object files
-OBJS := $(SRCS:.c=.o)
+OBJS := $(SRCS:.cc=.o)
 
 # name of executable
-EXEC := main
+EXEC := physics-engine
 
 # default recipe
 all: $(EXEC)
+# recipe to clean the workspace
+clean:
+	rm -f $(EXEC) $(OBJS)
  
 showfont: showfont.c Makefile
 	$(CC) -o $@ $@.c $(CFLAGS) $(LIBS)
@@ -31,11 +37,8 @@ $(EXEC): $(OBJS) $(HDRS) Makefile
 	$(CC) -o $@ $(OBJS) $(CFLAGS)
 
 # recipe for building object files
-#$(OBJS): $(@:.o=.c) $(HDRS) Makefile
-#    $(CC) -o $@ $(@:.o=.c) -c $(CFLAGS)
+$(OBJS): $(@:.o=.cc) $(HDRS) Makefile
+	$(CC) -o $@ $(@:.o=.cc) -c $(CFLAGS)
 
-# recipe to clean the workspace
-clean:
-	rm -f $(EXEC) $(OBJS)
 
 .PHONY: all clean
