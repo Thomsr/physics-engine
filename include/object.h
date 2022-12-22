@@ -9,20 +9,20 @@
 
 class Object{
 public:
-    Object(SDL_Window * Window);
+    void Set(SDL_Renderer * &Renderer);
     void Update();
+    void Render(SDL_Renderer * &Renderer);
     bool applyGravity(); 
     void Destroy();
 
-    SDL_Renderer * getRend(){ return rend; }
-    SDL_Texture * getTex(){ return tex; }
-    SDL_Rect getDest(){ return dest; }
+    SDL_Texture * getTex(){ return Texture; }
+    SDL_Rect getDest(){ return Rect; }
 protected:
 private:
     const double gravitySpeed = 9.8;
-    SDL_Renderer* rend;
-    SDL_Texture* tex;
-    SDL_Rect dest;
+    SDL_Surface* Surface;
+    SDL_Texture* Texture;
+    SDL_Rect Rect;
 };
 
 #endif

@@ -7,6 +7,8 @@
 
 #include <iostream>
 
+#include "../include/object.h"
+
 class PhysicsEngine{
 public:
     PhysicsEngine() : Running(true), Window(NULL){} 
@@ -22,6 +24,11 @@ private:
     bool Running;
     SDL_Window * Window;
     SDL_Surface * Screen;
+    SDL_Renderer* Renderer;
+    SDL_Surface* Surface;
+    SDL_Texture* Texture;
+    SDL_Rect Rect;
+    Object o;
 };
 
 #endif

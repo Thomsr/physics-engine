@@ -1,4 +1,3 @@
-// #include "../include/object.h"
 #include "../include/physics-engine.h"
 
 int PhysicsEngine::OnExecute(){
@@ -19,6 +18,9 @@ bool PhysicsEngine::OnInit(){
 	if(SDL_Init(SDL_INIT_EVERYTHING) < 0) return false;
 	Window = SDL_CreateWindow("Physics Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
 	if(Window == NULL) return false;
+	Uint32 render_flags = SDL_RENDERER_ACCELERATED;
+	Renderer = SDL_CreateRenderer(Window, -1, render_flags);
+	o.Set(Renderer);
 	return true;
 }
 
@@ -40,7 +42,13 @@ void PhysicsEngine::OnLoop(){
 }
 
 void PhysicsEngine::OnRender(){
-	SDL_UpdateWindowSurface(Window);
+	// SDL_UpdateWindowSurface(Window);
+	SDL_RenderClear(Renderer);
+	o.Render(Renderer);
+    // triggers the double buffers
+    // for multiple rendering
+    SDL_RenderPresent(Renderer);
+	SDL_Delay(1000 / 60);
 }
 
 void PhysicsEngine::OnCleanup(){
