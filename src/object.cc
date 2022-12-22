@@ -1,12 +1,15 @@
 #include "../include/object.h"
 
-void Object::Set(SDL_Renderer * &Renderer){
+void Object::SetRenderer(SDL_Renderer * &Renderer){
     Surface = IMG_Load("./textures/Gui.png");
 	Texture = SDL_CreateTextureFromSurface(Renderer, Surface);
 	SDL_FreeSurface(Surface);
 	SDL_QueryTexture(Texture, NULL, NULL, &Rect.w, &Rect.h);
-	Rect.x = 100;
-	Rect.y = 100;
+}
+
+void Object::SetPos(int x, int y){
+	Rect.x = x;
+	Rect.y = y;
 }
 
 void Object::Update(){

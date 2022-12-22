@@ -6,6 +6,7 @@
 #include <SDL2/SDL_timer.h>
 
 #include <iostream>
+#include <vector>
 
 #include "../include/object.h"
 
@@ -28,7 +29,8 @@ private:
     SDL_Surface* Surface;
     SDL_Texture* Texture;
     SDL_Rect Rect;
-    Object o;
+    
+    std::vector<Object> Objects;
 };
 
 #endif

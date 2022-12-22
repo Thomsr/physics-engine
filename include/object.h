@@ -9,7 +9,8 @@
 
 class Object{
 public:
-    void Set(SDL_Renderer * &Renderer);
+    void SetRenderer(SDL_Renderer * &Renderer);
+    void SetPos(int x, int y);
     void Update();
     void Render(SDL_Renderer * &Renderer);
     bool applyGravity(); 
